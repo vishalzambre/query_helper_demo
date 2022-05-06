@@ -1,0 +1,25 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see Rails configuration guide
+  # https://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  url: <%= ENV.fetch("DATABASE_URL") %>
+
+development:
+  <<: *default
+  database: query_helper_demo_development
+
+test:
+  <<: *default
+  database: query_helper_demo_test
+
+
+production:
+  <<: *default
+  database: query_helper_demo_production
+
+snowflake:
+  adapter: odbc
+  dsn: PredictDbAds
+  pool: <%= ENV.fetch("RAILS_DB_CONNECTIONS") { 15 } %>
